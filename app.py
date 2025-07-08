@@ -13,7 +13,7 @@ scaling=pickle.load(open('scaling.pkl','rb'))
 def home():
     return render_template('home.html')
 
-@app.route('/predict_api',methods=["POST"])
+@app.route('/predict_api',methods=["POST"])   #For checking via Postman
 def predict_api():
     data=request.json['data']   #this received data will be in the form of key:value pair
     print(data)
@@ -27,6 +27,7 @@ def predict_api():
 @app.route('/predict', methods=['POST'])
 def predict():
     data=[float(x) for x in request.form.values()]
+    print(f"initial data is {data}")
     #data=np.array(data).reshape(1,-1)
     final_input=scaling.transform(np.array(data).reshape(1,-1))
     print(final_input)
